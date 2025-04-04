@@ -30,9 +30,10 @@
     "typescript": "^5.1.6"
   },
   "prettier": {
-    "semi": false,
-    "printWidth": 100,
+    "semi": true,
+    "printWidth": 120,
     "bracketSpacing": false,
-    "singleQuote": true
+    "singleQuote": false,
+    "trailingComma": "none"
   }
 }

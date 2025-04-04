@@ -1,0 +1,7 @@
+README.md
+*.hbs
+
+dist
+node_modules
+.turbo
+.next
