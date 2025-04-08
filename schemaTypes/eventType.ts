@@ -4,10 +4,15 @@ export const eventType = defineType({
   name: "event",
   title: "Event",
   type: "document",
+  groups: [
+    {name: "details", title: "Details"},
+    {name: "editorial", title: "Editorial"}
+  ],
   fields: [
     defineField({
       name: "name",
-      type: "string"
+      type: "string",
+      group: "details"
     }),
     defineField({
       name: "slug",
@@ -16,7 +21,8 @@ export const eventType = defineType({
       validation: (rule) => rule.required().error(`Required to generate a slug on the website`),
       hidden: ({document}) => {
         return !document?.name;
-      }
+      },
+      group: "details"
     }),
     defineField({
       name: "eventType",
@@ -24,17 +30,20 @@ export const eventType = defineType({
       options: {
         list: ["in-person", "virtual"],
         layout: "radio"
-      }
+      },
+      group: "details"
     }),
     defineField({
       name: "date",
-      type: "datetime"
+      type: "datetime",
+      group: "details"
     }),
     defineField({
       name: "doorsOpen",
       description: "Number of minutes before the start time for admission",
       type: "number",
-      placeholder: "60 minutes"
+      placeholder: "60 minutes",
+      group: "details"
     }),
     defineField({
       name: "venue",
@@ -45,25 +54,30 @@ export const eventType = defineType({
         rule.custom((value, context) => {
           if (value && context?.document?.eventType === "virtual") return "Only in-person events can have a venue";
           return true;
-        })
+        }),
+      group: "details"
     }),
     defineField({
       name: "headline",
       type: "reference",
-      to: [{type: "artist"}]
+      to: [{type: "artist"}],
+      group: "details"
     }),
     defineField({
       name: "image",
-      type: "image"
+      type: "image",
+      group: "editorial"
     }),
     defineField({
       name: "details",
       type: "array",
-      of: [{type: "block"}]
+      of: [{type: "block"}],
+      group: "editorial"
     }),
     defineField({
       name: "tickets",
-      type: "url"
+      type: "url",
+      group: "details"
     })
   ]
 });
