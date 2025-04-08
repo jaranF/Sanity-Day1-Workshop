@@ -30,7 +30,7 @@ export const eventType = defineType({
       name: "doorsOpen",
       description: "Number of minutes before the start time for admission",
       type: "number",
-      initialValue: 60
+      placeholder: "60 minutes"
     }),
     defineField({
       name: "venue",
