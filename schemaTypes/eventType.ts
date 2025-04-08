@@ -114,11 +114,32 @@ export const eventType = defineType({
       group: "details"
     })
   ],
+  // Update the preview key in the schema
   preview: {
     select: {
-      title: "name",
-      subtitle: "headline.name",
-      media: "image"
+      name: "name",
+      venue: "venue.name",
+      artist: "headline.name",
+      date: "date",
+      image: "image"
+    },
+    prepare({name, venue, artist, date, image}) {
+      const nameFormatted = name || "Untitled event";
+      const dateFormatted = date
+        ? new Date(date).toLocaleDateString(undefined, {
+            month: "short",
+            day: "numeric",
+            year: "numeric",
+            hour: "numeric",
+            minute: "numeric"
+          })
+        : "No date";
+
+      return {
+        title: artist ? `${nameFormatted} (${artist})` : nameFormatted,
+        subtitle: venue ? `${dateFormatted} at ${venue}` : dateFormatted,
+        media: image || icons.CalendarIcon
+      };
     }
   }
 });
