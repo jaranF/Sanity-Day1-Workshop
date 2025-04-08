@@ -1,5 +1,28 @@
-import {NumberInputProps} from "sanity";
+import {NumberInputProps, useFormValue} from "sanity";
+import {Stack, Text} from "@sanity/ui";
+
+function subtractMinutesFromDate(date: string, minutes: number) {
+  return new Date(new Date(date).getTime() - minutes * 60000);
+}
 
 export function DoorsOpenInput(props: NumberInputProps) {
-  return <div style={{border: "1px dashed red"}}>DoorsOpenInput</div>;
+  const date = useFormValue(["date"]) as string | undefined;
+
+  return (
+    <Stack space={3}>
+      {props.renderDefault(props)}
+      {typeof props.value === "number" && date ? (
+        <Text size={1}>
+          Doors open at{" "}
+          {subtractMinutesFromDate(date, props.value).toLocaleString(undefined, {
+            month: "long",
+            day: "numeric",
+            year: "numeric",
+            hour: "numeric",
+            minute: "numeric"
+          })}
+        </Text>
+      ) : null}
+    </Stack>
+  );
 }
