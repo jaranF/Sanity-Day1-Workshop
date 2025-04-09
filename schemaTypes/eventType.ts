@@ -6,7 +6,6 @@ export const eventType = defineType({
   name: "event",
   title: "Event",
   type: "document",
-  icon: icons.WarningFilledIcon,
   groups: [
     {name: "details", title: "Details"},
     {name: "editorial", title: "Editorial"}
@@ -110,7 +109,7 @@ export const eventType = defineType({
       return {
         title: artist ? `${nameFormatted} (${artist})` : nameFormatted,
         subtitle: venue ? `${dateFormatted} at ${venue}` : dateFormatted,
-        media: image || icons.CalendarIcon
+        media: image || icons.PlayIcon
       };
     }
   }

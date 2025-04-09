@@ -6,8 +6,7 @@ export const structure: StructureResolver = (S) =>
     .id("root")
     .title("Content")
     .items([
-      /*      S.documentTypeListItem("event").title("Events").icon(CalendarIcon), */
-      S.documentTypeListItem("event").title("Events"),
+      S.documentTypeListItem("event").title("Events").icon(CalendarIcon),
       S.documentTypeListItem("artist").title("Artists").icon(UsersIcon),
       S.documentTypeListItem("venue").title("Venues").icon(PinIcon)
     ]);
