@@ -6,7 +6,7 @@ export const eventType = defineType({
   name: "event",
   title: "Event",
   type: "document",
-  icon: icons.ClockIcon,
+  icon: icons.WarningFilledIcon,
   groups: [
     {name: "details", title: "Details"},
     {name: "editorial", title: "Editorial"}
