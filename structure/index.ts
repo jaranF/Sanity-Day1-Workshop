@@ -6,21 +6,17 @@ export const structure: StructureResolver = (S) =>
     .id("root")
     .title("Content")
     .items([
-      ...S.documentTypeListItems()
-        .map((item, index) => {
-          console.groupCollapsed(`${" " + (index + 1)}. item.getSchemaType()`);
-          // [Log] {jsonType: "object", type: Object, name: "event", title: "Event", fields: Array, …}
-          console.log(item.getSchemaType());
-          console.groupEnd();
-          console.groupCollapsed(`${" " + (index + 1)}. item.getId()`);
-          //[Log] "event"|"venue"|"artist" (i.e. logs one of those)
-          console.log(item.getId());
-          console.groupEnd();
-          console.groupCollapsed(`${" " + (index + 1)}. item.getChild()`);
-          //[Log] function (id, childContext) => { const parent = childContext.parent, parentItem = isList(parent) ? parent.items.find((item) => item.id === id) : null; ... ... ...
-          console.log(item.getChild());
-          console.groupEnd();
-          return item;
-        })
-        .reverse()
+      S.listItem()
+        .title("Upcoming Events")
+        .schemaType("event")
+        .icon(CalendarIcon)
+        .child(S.documentList().title("Upcoming Events").filter("date > now()")),
+      S.listItem()
+        .title("Past Events")
+        .schemaType("event")
+        .icon(CalendarIcon)
+        .child(S.documentList().title("Past Events").filter("date < now()")),
+      S.divider(),
+      S.documentTypeListItem("artist").title("Artists").icon(UsersIcon),
+      S.documentTypeListItem("venue").title("Venues").icon(PinIcon)
     ]);
